@@ -1,0 +1,14 @@
+name: SpaceportLogin
+main: com.spaceport.login.SpaceportLogin
+version: ${version}
+api-version: "1.21"
+depend: [AuthMe]
+softdepend: [LuckPerms]
+commands:
+  2fa:
+    description: Confirm a staff login
+    usage: /2fa <code> | setup | allow <player>
+permissions:
+  spaceport.2fa.admin:
+    description: Allow a staff account to set up its second step with /2fa allow
+    default: op
