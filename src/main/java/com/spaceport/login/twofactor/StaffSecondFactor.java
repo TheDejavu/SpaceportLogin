@@ -88,8 +88,9 @@ public final class StaffSecondFactor implements CommandExecutor {
   }
 
   private void allow(CommandSender sender, String name) {
-    // Held staff cannot vouch for anyone, themselves included.
-    if (sender instanceof Player player && (!player.hasPermission(ADMIN) || LoginHold.isHeld(player))) {
+    // Only a logged-in admin past their own second step can vouch for anyone.
+    if (sender instanceof Player player && (!player.hasPermission(ADMIN)
+        || !AuthMeApi.getInstance().isAuthenticated(player) || holding(player) || LoginHold.isHeld(player))) {
       sender.sendMessage(Component.text("You cannot allow a second step setup."));
       return;
     }
